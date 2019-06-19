@@ -1,5 +1,10 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/cursones')
+    .then(() => console.log('Connected to MongoDB...'))
+    .catch(err => console.error('Could not connect to MongoDB...'));
 
 app.use(express.json());
 
@@ -12,4 +17,4 @@ app.use('/api/teachers', teachersRouter);
 app.use('/api/students', studentsRouter);
 
 const PORT = process.env.PORT || 3000;
-app.listen(3000, () => console.log(`Ouvindo na porta ${PORT}`));
+app.listen(3000, () => console.log(`Listening on port ${PORT}`));
