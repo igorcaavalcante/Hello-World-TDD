@@ -1,8 +1,30 @@
 const express = require('express');
 const router = express.Router();
-/*
-router.post('/', (req, res) => {
-    //CREATE
+const { Teacher } = require('../../models/teacher');
+
+router.post('/', async (req, res) => {
+
+    if (!req.body.name) {
+        res.status(400).send("Missing fields");
+        return;
+    }
+
+    let teacher;
+
+    try {
+
+        teacher = new Teacher({
+            name: req.body.name,
+        });
+        await teacher.save();
+
+    } catch (error) {
+        res.status(400).send('Error: ' + error.message);
+        return;
+    }
+
+    res.status(200).send(teacher);
+
 });
 
 router.get('/', (req, res) => {
@@ -20,5 +42,5 @@ router.patch('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     //DELETE ONE
 });
-*/
+
 module.exports = router;
