@@ -17,4 +17,6 @@ app.use('/api/teachers', teachersRouter);
 app.use('/api/students', studentsRouter);
 
 const PORT = process.env.PORT || 3000;
-app.listen(3000, () => console.log(`Listening on port ${PORT}`));
+const server = app.listen(3000, () => console.log(`Listening on port ${PORT}`));
+
+module.exports = server;
