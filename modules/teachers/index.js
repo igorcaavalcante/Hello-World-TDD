@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+/*
 router.post('/', (req, res) => {
     //CREATE
 });
@@ -20,5 +20,5 @@ router.patch('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     //DELETE ONE
 });
-
+*/
 module.exports = router;
