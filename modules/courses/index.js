@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const { Course } = require('../../models/course');
+const { Teacher } = require('../../models/teacher');
 
 router.post('/', async (req, res) => {
 
@@ -10,8 +11,12 @@ router.post('/', async (req, res) => {
         return;
     }
 
-    if (!mongoose.Types.ObjectId.isValid(req.body.teacher)){
-        res.status(400).send('Invalid teacher');
+    const teacher = Teacher.findOne({
+        'id': req.body.teacher,
+    });
+
+    if (!teacher) {
+        res.status(404).send('Teacher not found');
         return;
     }
 
@@ -29,6 +34,7 @@ router.post('/', async (req, res) => {
         
     } catch (error) {
         res.status(400).send('Error: ' + error.message);
+        return;
     }
 
     res.status(200).send(course);
